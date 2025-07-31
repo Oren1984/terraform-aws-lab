@@ -24,3 +24,15 @@ override.tf.json
 # Ignore sensitive temp files
 *.pem
 *.key
+
+# Editor swap/backup files
+*.swp
+*.bak
+*.tmp
+*~
+
+# MacOS files
+.DS_Store
+
+# Logs
+*.log

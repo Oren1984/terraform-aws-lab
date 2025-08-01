@@ -72,7 +72,7 @@ This directory contains three Terraform tasks demonstrating how to use reusable 
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 
 ```text
 Terraform >= 1.3.0 
@@ -88,5 +88,5 @@ The structure helps maintain clean, scalable infrastructure code.
 
 
 ✅ Completed Successfully
-📅 Last Updated: August 1, 2025
-👤 Author: Oren
+Last Updated: August 1, 2025
+Author: Oren

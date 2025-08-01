@@ -1,0 +1,16 @@
+Terraform Backend – Task 32: Store Terraform State in S3
+
+✅ Step 1: S3 bucket created successfully via Terraform
+Resource: aws_s3_bucket.backend_bucket
+
+✅ Step 2: backend.tf created with S3 backend configuration
+Backend:
+- bucket = "oren-terraform-state-bucket"
+- key    = "state/dev/terraform.tfstate"
+- region = "us-east-1"
+
+✅ terraform init completed
+Terraform detected the new backend and migrated local state to the S3 bucket.
+
+🗂 .terraform/ directory created
+🧾 Remote state now stored in: s3://oren-terraform-state-bucket/state/dev/terraform.tfstate

@@ -1,0 +1,2 @@
+Terraform version: >= 1.6.0
+Provider: hashicorp/aws ~> 5.0

@@ -1,0 +1,15 @@
+Terraform Plan – Task 31: Understanding `terraform plan`
+
+✅ Plan executed successfully.
+
+Summary:
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + bucket_name = "oren-tf-plan-demo-bucket"
+
+No resources were actually created, as this was only a dry-run (`terraform plan`).
+
+Note:
+To ensure this exact plan is applied later, you can run:
+terraform plan -out=tfplan

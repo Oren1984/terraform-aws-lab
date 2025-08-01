@@ -1,0 +1,11 @@
+Terraform EC2 Task 29: Create EC2 Instances with Different Types
+
+✅ Step 1: Variables defined for different EC2 instance types
+✅ Step 2: Instances created using for_each over the map
+✅ terraform apply completed successfully
+
+Output:
+instance_names = [
+  "web1",
+  "web2",
+]

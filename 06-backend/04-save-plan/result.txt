@@ -1,0 +1,8 @@
+Terraform Save Plan – Task 34: Use terraform plan -out
+
+✅ Step 1: terraform plan -out=tfplan executed successfully.
+✅ Step 2: terraform apply tfplan used the saved plan file.
+✅ Step 3: Resource (S3 bucket) created as expected.
+
+Outputs:
+bucket_name = "oren-tf-plan-save-example"

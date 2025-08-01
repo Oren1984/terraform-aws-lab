@@ -1,0 +1,9 @@
+Task 27 – Create S3 Buckets from List
+
+✅ 3 Buckets created successfully:
+ - my-backup-bucket
+ - my-logs-bucket
+ - my-media-bucket
+
+Terraform Plan:
+Plan: 3 to add, 0 to change, 0 to destroy.

@@ -1,92 +1,52 @@
-# Terraform AWS Modules – Summary
+# Terraform Modules & Integrations – Summary
 
-This directory contains three Terraform tasks demonstrating how to use reusable modules in Terraform to manage AWS resources efficiently.
-
----
-
-## 📁 01-iam-user-module
-
-**Goal**: Create an IAM user using a reusable module.
-
-**Structure**:
-01-iam-user-module/
-├── backend.tf
-├── main.tf
-├── modules/
-│ └── user/
-│ ├── main.tf
-│ └── variables.tf
-├── outputs.tf
-├── requirements.txt
-└── README.md
-
-**Details**:
-- The module `user` accepts a `user_name` variable and creates an IAM user with that name.
-- Reusable for creating multiple users with different names.
+This directory contains multiple Terraform tasks, from basic reusable modules to advanced CI/CD and security integrations.
 
 ---
 
-## 📁 02-ec2-module
-
-**Goal**: Launch an EC2 instance using a module.
-
-**Structure**:
-02-ec2-module/
-├── backend.tf
-├── main.tf
-├── modules/
-│ └── ec2/
-│ ├── main.tf
-│ └── variables.tf
-├── outputs.tf
-├── requirements.txt
-└── README.md
-
-**Details**:
-- Takes AMI ID, instance type, and instance name as inputs.
-- Deploys a virtual machine (e.g., Ubuntu) with specified parameters.
-- The instance is tagged for easy identification.
+## 🧩 Core Terraform Modules
+- **01-iam-user-module** – Create IAM users with a reusable module.  
+- **02-ec2-module** – Launch EC2 instances using a module.  
+- **03-s3-module** – Create S3 buckets using a module.  
+- **04-github-ec2-module** – Example: consume a module directly from GitHub.  
+- **05-ReadOnlyGroup** – Remote module usage: IAM user with ReadOnly group.  
+- **06-Administrators** – Remote module usage: IAM user with Admin group.
 
 ---
 
-## 📁 03-s3-module
-
-**Goal**: Create two different S3 buckets using the same module.
-
-**Structure**:
-03-s3-module/
-├── backend.tf
-├── main.tf
-├── modules/
-│ └── s3-bucket/
-│ ├── main.tf
-│ └── variables.tf
-├── outputs.tf
-├── requirements.txt
-└── README.md
-
-**Details**:
-- Module takes `bucket_name` as input.
-- Used twice to create `logs` and `media` buckets with different names.
-- Outputs display created bucket names.
+## 🌍 Workspaces
+- **07-default-workspace** – Observe default workspace.  
+- **08-new-workspace** – Create and use a new workspace (`dev`).  
+- **09-switch-workspaces** – Switch between workspaces (default/dev).  
+- **10-workspace-specific-behavior** – Different configs per workspace.  
+- **11-manage-workspaces** – List and delete workspaces.
 
 ---
 
-## Requirements
+## 🔒 Security Scanning with Checkov
+- **12-install-checkov** – Install Checkov on Ubuntu.  
+- **13-checkov-iam-scan** – Detect overly permissive IAM policy.  
+- **14-checkov-multi-scan** – Scan larger project (S3 + SG misconfigs).
 
-```text
-Terraform >= 1.3.0 
-AWS Provider >= 5.0
+---
+
+## ⚙️ CI/CD Integrations
+- **15-jenkins-terraform-pipeline** – Run Terraform via Jenkins pipeline with AWS credentials.  
+- **16-github-actions-terraform** – Terraform plan/apply with GitHub Actions + AWS access keys.  
+- **17-github-actions-terraform-workspaces** – Use workspaces in GitHub Actions.  
+- **18-github-actions-terraform-oidc** – Secure GitHub Actions → AWS with OIDC IAM role (no keys).
+
+---
+
+## 📝 Notes
+- All tasks are **independent** examples.  
+- Modules are **reusable** across projects.  
+- Workspaces demonstrate **environment isolation**.  
+- CI/CD tasks show both **classic (keys)** and **modern (OIDC)** integrations.  
+- Security tasks introduce **Checkov** for IaC scanning.  
+
+---
 
 
-📌 Notes
-All modules are fully reusable.
-
-State management is configured via remote S3 backend.
-
-The structure helps maintain clean, scalable infrastructure code.
-
-
-✅ Completed Successfully
-Last Updated: August 1, 2025
-Author: Oren
+_Last Updated: August 2025_  
+_Author: Oren_

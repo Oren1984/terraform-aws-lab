@@ -37,6 +37,7 @@ AWS Provider – Terraform Registry
 
 https://registry.terraform.io/
 
+
 ## ✅ Execution Notes
 
 - All Terraform configurations were executed using `terraform init`, `apply`, `destroy`.

@@ -2,9 +2,6 @@
 
 This task demonstrates how to use a **remote module from the Terraform Registry** to create an IAM user with **ReadOnlyAccess** permissions.
 
-> ⚠️ If this is only for **documentation purposes**, you don’t need to run `apply`.  
-> If you plan to run it for real, make sure your AWS credentials are properly configured and remember to clean up afterwards (`destroy`).
-
 ---
 
 ## Prerequisites

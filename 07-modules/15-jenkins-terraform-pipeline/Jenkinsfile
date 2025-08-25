@@ -1,0 +1,67 @@
+pipeline {
+  agent any
+
+  environment {
+    # These must match credentials IDs configured in Jenkins
+    AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+    AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+    AWS_DEFAULT_REGION    = 'us-east-1'
+  }
+
+  options {
+    timestamps()
+    ansiColor('xterm')
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+        sh 'pwd && ls -la'
+      }
+    }
+
+    stage('Terraform Version') {
+      steps {
+        sh 'terraform -version'
+      }
+    }
+
+    stage('Terraform Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+
+    stage('Terraform Validate') {
+      steps {
+        sh 'terraform fmt -check || true'
+        sh 'terraform validate'
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        sh 'terraform plan -out=tfplan'
+      }
+    }
+
+    stage('Terraform Apply') {
+      when {
+        anyOf {
+          branch 'main'
+          branch 'master'
+        }
+      }
+      steps {
+        sh 'terraform apply -auto-approve tfplan || terraform apply -auto-approve'
+      }
+    }
+  }
+
+  post {
+    always {
+      sh 'echo "Pipeline finished. Current workspace: $WORKSPACE"'
+    }
+  }
+}

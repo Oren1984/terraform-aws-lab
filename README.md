@@ -29,6 +29,14 @@ All resources were created, tested, and destroyed using Terraform on a real AWS 
 
 ---
 
+📚 דוקומנטציה רשמית חשובה
+
+AWS VPC Resource – Terraform Registry
+
+AWS Provider – Terraform Registry
+
+https://registry.terraform.io/
+
 ## ✅ Execution Notes
 
 - All Terraform configurations were executed using `terraform init`, `apply`, `destroy`.

@@ -1,67 +1,36 @@
 pipeline {
-  agent any
-
-  environment {
-    # These must match credentials IDs configured in Jenkins
-    AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
-    AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
-    AWS_DEFAULT_REGION    = 'us-east-1'
-  }
-
-  options {
-    timestamps()
-    ansiColor('xterm')
-  }
+  agent any   // Run on any available Jenkins agent
 
   stages {
-    stage('Checkout') {
+    stage('Code Checkout') {
       steps {
-        checkout scm
-        sh 'pwd && ls -la'
+        // Clone the GitHub repository (main branch)
+        git branch: 'main', url: 'https://github.com/Oren1984/terraform-aws-lab.git'
       }
     }
 
-    stage('Terraform Version') {
+    stage('Terraform init') {
       steps {
-        sh 'terraform -version'
-      }
-    }
-
-    stage('Terraform Init') {
-      steps {
+        // Initialize Terraform (download providers, configure backend, etc.)
         sh 'terraform init'
       }
     }
 
-    stage('Terraform Validate') {
-      steps {
-        sh 'terraform fmt -check || true'
-        sh 'terraform validate'
-      }
-    }
-
-    stage('Terraform Plan') {
-      steps {
-        sh 'terraform plan -out=tfplan'
-      }
-    }
-
     stage('Terraform Apply') {
-      when {
-        anyOf {
-          branch 'main'
-          branch 'master'
+      steps {
+        // Inject AWS credentials only for this block using Jenkins credentials
+        withCredentials([
+          string(credentialsId: 'aws-access-key-id',     variable: 'AWS_ACCESS_KEY_ID'),
+          string(credentialsId: 'aws-secret-access-key-id', variable: 'AWS_SECRET_ACCESS_KEY')
+        ]) {
+          // Set AWS region and run Terraform apply automatically
+          sh '''
+            export AWS_DEFAULT_REGION="us-east-1"
+            terraform apply -auto-approve
+          '''
         }
       }
-      steps {
-        sh 'terraform apply -auto-approve tfplan || terraform apply -auto-approve'
-      }
-    }
-  }
-
-  post {
-    always {
-      sh 'echo "Pipeline finished. Current workspace: $WORKSPACE"'
     }
   }
 }
+
